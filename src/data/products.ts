@@ -1,0 +1,28 @@
+export const PRODUCTS = [
+  {id:1,cat:'iphone',name:'iPhone 17 Pro',desc:'6.3" Super Retina XDR, A19 Bionic chip, Triple camera',emoji:'📱',price:1199,old:1299,badge:'NEW',rating:4.9,reviews:2841,
+    variants:['Natural Titanium','Black Titanium','White Titanium','Desert Titanium'],
+    specs:{'Display':'6.3" OLED Super Retina XDR','Chip':'A19 Bionic','Storage':'256GB / 512GB / 1TB','Camera':'48MP Main + 48MP Ultra Wide + 12MP Tele','Battery':'All-day battery life','5G':'Yes'}},
+  {id:2,cat:'iphone',name:'iPhone 17',desc:'6.1" OLED display, A19 chip, 48MP dual camera system',emoji:'📱',price:799,old:null,badge:null,rating:4.8,reviews:1530,
+    variants:['Midnight','Starlight','Blue','Pink','Yellow'],
+    specs:{'Display':'6.1" OLED','Chip':'A19','Storage':'128GB / 256GB / 512GB','Camera':'48MP Main + 12MP Ultra Wide','Battery':'All-day','5G':'Yes'}},
+  {id:3,cat:'iphone',name:'iPhone 17 Plus',desc:'6.7" big screen experience with A19 chip performance',emoji:'📱',price:899,old:null,badge:null,rating:4.7,reviews:924,
+    variants:['Midnight','Starlight','Blue','Pink'],
+    specs:{'Display':'6.7" OLED','Chip':'A19','Storage':'128GB / 256GB / 512GB','Camera':'48MP Main + 12MP Ultra Wide','Battery':'Excellent battery life','5G':'Yes'}},
+  {id:4,cat:'iphone',name:'iPhone 17 Pro Max',desc:'6.9" titanium powerhouse. Best iPhone ever made.',emoji:'📱',price:1399,old:1499,badge:'HOT',rating:5.0,reviews:4201,
+    variants:['Natural Titanium','Black Titanium','White Titanium'],
+    specs:{'Display':'6.9" OLED ProMotion','Chip':'A19 Bionic','Storage':'256GB – 2TB','Camera':'48MP Main + 48MP Ultra Wide + 12MP Periscope Tele','Battery':'Best in iPhone history','5G':'Yes'}},
+  {id:5,cat:'shoes',name:'Air Jordan 1 Retro High',desc:'The original that changed everything. Iconic leather upper.',emoji:'👟',price:180,old:220,badge:'SALE',rating:4.9,reviews:5120,
+    variants:['Size 8','Size 9','Size 10','Size 11','Size 12'],
+    specs:{'Upper':'Full-grain leather','Sole':'Rubber cupsole','Cushioning':'Air-Sole unit','Colorway':'Black/Red','Fit':'True to size','Origin':'Indonesia'}},
+  {id:6,cat:'shoes',name:'Nike Dunk Low',desc:'Street-ready court classic. Padded collar for comfort.',emoji:'👟',price:110,old:null,badge:null,rating:4.7,reviews:3302,
+    variants:['Size 7','Size 8','Size 9','Size 10','Size 11'],
+    specs:{'Upper':'Leather/Synthetic','Sole':'Rubber','Cushioning':'Foam midsole','Colorway':'White/Black','Fit':'True to size','Origin':'Vietnam'}},
+  {id:7,cat:'shoes',name:'Adidas Samba OG',desc:'Heritage training shoe turned streetwear essential.',emoji:'👟',price:100,old:null,badge:'TRENDING',rating:4.8,reviews:2800,
+    variants:['Size 8','Size 9','Size 10','Size 11'],
+    specs:{'Upper':'Leather with suede overlays','Sole':'Gum rubber','Cushioning':'EVA','Colorway':'White/Black/Gum','Fit':'Slightly narrow','Origin':'China'}},
+  {id:8,cat:'shoes',name:'New Balance 550',desc:'80s hoops aesthetic. Premium leather with retro sole.',emoji:'👟',price:130,old:160,badge:'SALE',rating:4.6,reviews:1980,
+    variants:['Size 8','Size 9','Size 10','Size 11','Size 12'],
+    specs:{'Upper':'Full-grain leather','Sole':'Rubber','Cushioning':'ENCAP midsole','Colorway':'White/Green','Fit':'True to size','Origin':'China'}},
+];
+
+export default PRODUCTS;

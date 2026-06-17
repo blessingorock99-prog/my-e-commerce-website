@@ -1,0 +1,626 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SneakTech</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --teal:#0F6E56;--teal-light:#1D9E75;--teal-pale:#E1F5EE;--teal-mid:#5DCAA5;
+  --dark:#0a0f0d;--card:#9dedd2;--surface:#f0faf6;
+  --text:#f0faf6;--muted:#7aaa94;--border:#1e3a2e;
+  --white:#fff;--off:#f5faf8;
+}
+body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--text);min-height:100vh;}
+a{text-decoration:none;color:inherit;}
+button{cursor:pointer;border:none;background:none;font-family:inherit;}
+input{font-family:inherit;}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(255, 255, 255, 0.92)-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px;}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.4rem;color:var(--teal-mid);}
+.logo span{color:var(--text);}
+.nav-links{display:flex;gap:2rem;align-items:center;}
+.nav-link{font-size:.9rem;color:var(--muted);transition:color .2s;}
+.nav-link:hover,.nav-link.active{color:var(--text);}
+.nav-right{display:flex;gap:1rem;align-items:center;}
+.nav-icon{width:36px;height:36px;border-radius:8px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;position:relative;}
+.nav-icon:hover{border-color:var(--teal-light);background:rgba(29,158,117,.1);}
+.badge{position:absolute;top:-6px;right:-6px;background:var(--teal-light);color:#fff;font-size:10px;font-weight:700;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+
+/* HERO */
+
+
+/* SECTION */
+.section{max-width:1200px;margin:0 auto;padding:3rem 2rem;}
+.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;}
+.section-title{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:700;}
+.section-link{font-size:.85rem;color:var(--teal-mid);cursor:pointer;}
+
+/* CATEGORY PILLS */
+.cats{display:flex;gap:.75rem;margin-bottom:2rem;flex-wrap:wrap;}
+.cat{padding:.5rem 1.25rem;border-radius:100px;border:1px solid var(--border);font-size:.85rem;color:var(--muted);cursor:pointer;transition:all .2s;}
+.cat.active,.cat:hover{background:var(--teal-light);border-color:var(--teal-light);color:#fff;}
+
+/* PRODUCTS GRID */
+.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.5rem;}
+.product-card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:all .25s;cursor:pointer;}
+.product-card:hover{border-color:var(--teal-mid);transform:translateY(-4px);}
+.product-img{background:var(--surface);padding:2rem;text-align:center;font-size:4rem;position:relative;}
+.product-badge{position:absolute;top:12px;left:12px;background:var(--teal-light);color:#fff;font-size:.7rem;font-weight:600;padding:.2rem .6rem;border-radius:6px;}
+.product-wish{position:absolute;top:10px;right:10px;width:32px;height:32px;border-radius:8px;background:rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;}
+.product-wish:hover,.product-wish.active{background:rgba(29,158,117,.2);}
+.product-info{padding:1.25rem;}
+.product-name{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:.3rem;}
+.product-desc{font-size:.8rem;color:var(--muted);margin-bottom:.75rem;line-height:1.5;}
+.product-bottom{display:flex;align-items:center;justify-content:space-between;}
+.product-price{font-size:1.1rem;font-weight:600;color:var(--teal-mid);}
+.product-price .old{font-size:.8rem;color:var(--muted);text-decoration:line-through;margin-left:.4rem;}
+.add-btn{width:34px;height:34px;background:var(--teal-light);border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;}
+.add-btn:hover{background:var(--teal);}
+
+/* PRODUCT DETAIL */
+.detail-wrap{max-width:1100px;margin:0 auto;padding:2rem;}
+.detail-back{display:flex;align-items:center;gap:.5rem;color:var(--muted);cursor:pointer;font-size:.9rem;margin-bottom:2rem;transition:color .2s;}
+.detail-back:hover{color:var(--text);}
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;}
+.detail-img-wrap{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:3rem;text-align:center;font-size:8rem;}
+.detail-tag{display:inline-block;background:rgba(29,158,117,.12);color:var(--teal-mid);font-size:.75rem;padding:.3rem .8rem;border-radius:6px;margin-bottom:1rem;}
+.detail-name{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;line-height:1.2;margin-bottom:.75rem;}
+.detail-rating{display:flex;align-items:center;gap:.5rem;margin-bottom:1rem;}
+.stars{color:#f59e0b;}
+.detail-price{font-size:2rem;font-weight:700;color:var(--teal-mid);margin-bottom:1.5rem;}
+.detail-price .old{font-size:1.1rem;color:var(--muted);text-decoration:line-through;margin-left:.5rem;}
+.detail-section-label{font-size:.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.75rem;}
+.variants{display:flex;gap:.75rem;margin-bottom:1.5rem;flex-wrap:wrap;}
+.variant{padding:.5rem 1rem;border-radius:8px;border:1px solid var(--border);font-size:.85rem;cursor:pointer;transition:all .2s;color:var(--muted);}
+.variant.active,.variant:hover{border-color:var(--teal-light);color:var(--teal-mid);background:rgba(29,158,117,.08);}
+.qty-row{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;}
+.qty-ctrl{display:flex;align-items:center;gap:0;border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+.qty-btn{width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s;color:var(--text);}
+.qty-btn:hover{background:var(--surface);}
+.qty-val{width:40px;text-align:center;font-weight:500;}
+.detail-actions{display:flex;gap:1rem;}
+.btn-cart{flex:1;background:var(--teal-light);color:#fff;padding:1rem;border-radius:12px;font-weight:600;font-size:1rem;transition:all .2s;}
+.btn-cart:hover{background:var(--teal);}
+.btn-wish-lg{width:50px;border:1px solid var(--border);border-radius:12px;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.btn-wish-lg:hover{border-color:var(--teal-mid);}
+.detail-specs{margin-top:2rem;border-top:1px solid var(--border);padding-top:1.5rem;}
+.spec-row{display:flex;justify-content:space-between;padding:.6rem 0;border-bottom:1px solid rgba(30,58,46,.5);font-size:.9rem;}
+.spec-label{color:var(--muted);}
+
+/* CART */
+.cart-wrap{max-width:900px;margin:0 auto;padding:2rem;}
+.cart-title{font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;margin-bottom:2rem;}
+.cart-layout{display:grid;grid-template-columns:1fr 360px;gap:2rem;align-items:start;}
+.cart-items{display:flex;flex-direction:column;gap:1rem;}
+.cart-item{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.25rem;display:flex;gap:1.25rem;align-items:center;}
+.cart-item-img{background:var(--surface);border-radius:10px;width:72px;height:72px;display:flex;align-items:center;justify-content:center;font-size:2.2rem;flex-shrink:0;}
+.cart-item-info{flex:1;}
+.cart-item-name{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;margin-bottom:.25rem;}
+.cart-item-variant{font-size:.8rem;color:var(--muted);}
+.cart-item-right{text-align:right;}
+.cart-item-price{font-size:1.1rem;font-weight:600;color:var(--teal-mid);margin-bottom:.5rem;}
+.cart-remove{font-size:.75rem;color:var(--muted);cursor:pointer;transition:color .2s;}
+.cart-remove:hover{color:#f87171;}
+.order-box{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.5rem;position:sticky;top:80px;}
+.order-title{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:1.25rem;}
+.order-row{display:flex;justify-content:space-between;font-size:.9rem;margin-bottom:.75rem;color:var(--muted);}
+.order-total{display:flex;justify-content:space-between;font-size:1.1rem;font-weight:700;padding-top:.75rem;border-top:1px solid var(--border);margin-top:.5rem;}
+.promo-input{display:flex;gap:.5rem;margin:1rem 0;}
+.promo-input input{flex:1;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.6rem .8rem;color:var(--text);font-size:.85rem;}
+.promo-btn{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.6rem 1rem;color:var(--muted);font-size:.85rem;cursor:pointer;transition:all .2s;}
+.promo-btn:hover{border-color:var(--teal-mid);color:var(--teal-mid);}
+
+/* CHECKOUT */
+.checkout-wrap{max-width:900px;margin:0 auto;padding:2rem;}
+.checkout-grid{display:grid;grid-template-columns:1fr 340px;gap:2rem;}
+.form-title{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:1.25rem;margin-top:1.5rem;}
+.form-group{margin-bottom:1rem;}
+.form-label{display:block;font-size:.8rem;color:var(--muted);margin-bottom:.4rem;}
+.form-input{width:100%;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:.7rem 1rem;color:var(--text);font-size:.9rem;transition:border-color .2s;}
+.form-input:focus{outline:none;border-color:var(--teal-light);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;}
+.payment-method{display:flex;gap:.75rem;margin-bottom:1rem;}
+.pay-opt{flex:1;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:.75rem;text-align:center;cursor:pointer;transition:all .2s;font-size:.85rem;color:var(--muted);}
+.pay-opt.active,.pay-opt:hover{border-color:var(--teal-light);color:var(--teal-mid);}
+.btn-place{width:100%;background:var(--teal-light);color:#fff;padding:1rem;border-radius:12px;font-weight:600;font-size:1rem;margin-top:1rem;transition:all .2s;}
+.btn-place:hover{background:var(--teal);}
+
+/* AUTH */
+.auth-wrap{max-width:440px;margin:4rem auto;padding:2rem;}
+.auth-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:2.5rem;}
+.auth-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.4rem;color:var(--teal-mid);text-align:center;margin-bottom:.5rem;}
+.auth-logo span{color:var(--text);}
+.auth-sub{text-align:center;color:var(--muted);font-size:.9rem;margin-bottom:2rem;}
+.auth-tab{display:flex;background:var(--surface);border-radius:10px;padding:4px;margin-bottom:1.5rem;}
+.auth-tab-btn{flex:1;padding:.6rem;border-radius:8px;font-size:.9rem;transition:all .2s;color:var(--muted);}
+.auth-tab-btn.active{background:var(--teal-light);color:#fff;}
+.auth-social{display:flex;flex-direction:column;gap:.75rem;margin-top:1.5rem;}
+.social-btn{display:flex;align-items:center;justify-content:center;gap:.75rem;padding:.8rem;border:1px solid var(--border);border-radius:10px;font-size:.9rem;cursor:pointer;transition:all .2s;color:var(--muted);}
+.social-btn:hover{border-color:var(--teal-mid);color:var(--text);}
+.or-divider{text-align:center;color:var(--muted);font-size:.8rem;margin:1rem 0;position:relative;}
+.or-divider::before,.or-divider::after{content:'';position:absolute;top:50%;width:42%;height:1px;background:var(--border);}
+.or-divider::before{left:0;}.or-divider::after{right:0;}
+
+/* SUCCESS */
+.success-wrap{text-align:center;max-width:500px;margin:5rem auto;padding:2rem;}
+.success-icon{font-size:5rem;margin-bottom:1rem;}
+.success-title{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--teal-mid);margin-bottom:.75rem;}
+.success-sub{color:var(--muted);margin-bottom:2rem;line-height:1.6;}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:2rem;text-align:center;color:var(--muted);font-size:.85rem;margin-top:4rem;}
+
+/* SVG ICONS */
+svg{flex-shrink:0;}
+</style>
+</head>
+<body>
+
+<script>
+const PRODUCTS = [
+  {id:1,cat:'iphone',name:'iPhone 17 Pro',desc:'6.3" Super Retina XDR, A19 Bionic chip, Triple camera',emoji:'📱',price:1199,old:1299,badge:'NEW',rating:4.9,reviews:2841,
+    variants:['Natural Titanium','Black Titanium','White Titanium','Desert Titanium'],
+    specs:{'Display':'6.3" OLED Super Retina XDR','Chip':'A19 Bionic','Storage':'256GB / 512GB / 1TB','Camera':'48MP Main + 48MP Ultra Wide + 12MP Tele','Battery':'All-day battery life','5G':'Yes'}},
+  {id:2,cat:'iphone',name:'iPhone 17',desc:'6.1" OLED display, A19 chip, 48MP dual camera system',emoji:'📱',price:799,old:null,badge:null,rating:4.8,reviews:1530,
+    variants:['Midnight','Starlight','Blue','Pink','Yellow'],
+    specs:{'Display':'6.1" OLED','Chip':'A19','Storage':'128GB / 256GB / 512GB','Camera':'48MP Main + 12MP Ultra Wide','Battery':'All-day','5G':'Yes'}},
+  {id:3,cat:'iphone',name:'iPhone 17 Plus',desc:'6.7" big screen experience with A19 chip performance',emoji:'📱',price:899,old:null,badge:null,rating:4.7,reviews:924,
+    variants:['Midnight','Starlight','Blue','Pink'],
+    specs:{'Display':'6.7" OLED','Chip':'A19','Storage':'128GB / 256GB / 512GB','Camera':'48MP Main + 12MP Ultra Wide','Battery':'Excellent battery life','5G':'Yes'}},
+  {id:4,cat:'iphone',name:'iPhone 17 Pro Max',desc:'6.9" titanium powerhouse. Best iPhone ever made.',emoji:'📱',price:1399,old:1499,badge:'HOT',rating:5.0,reviews:4201,
+    variants:['Natural Titanium','Black Titanium','White Titanium'],
+    specs:{'Display':'6.9" OLED ProMotion','Chip':'A19 Bionic','Storage':'256GB – 2TB','Camera':'48MP Main + 48MP Ultra Wide + 12MP Periscope Tele','Battery':'Best in iPhone history','5G':'Yes'}},
+  {id:5,cat:'shoes',name:'Air Jordan 1 Retro High',desc:'The original that changed everything. Iconic leather upper.',emoji:'👟',price:180,old:220,badge:'SALE',rating:4.9,reviews:5120,
+    variants:['Size 8','Size 9','Size 10','Size 11','Size 12'],
+    specs:{'Upper':'Full-grain leather','Sole':'Rubber cupsole','Cushioning':'Air-Sole unit','Colorway':'Black/Red','Fit':'True to size','Origin':'Indonesia'}},
+  {id:6,cat:'shoes',name:'Nike Dunk Low',desc:'Street-ready court classic. Padded collar for comfort.',emoji:'👟',price:110,old:null,badge:null,rating:4.7,reviews:3302,
+    variants:['Size 7','Size 8','Size 9','Size 10','Size 11'],
+    specs:{'Upper':'Leather/Synthetic','Sole':'Rubber','Cushioning':'Foam midsole','Colorway':'White/Black','Fit':'True to size','Origin':'Vietnam'}},
+  {id:7,cat:'shoes',name:'Adidas Samba OG',desc:'Heritage training shoe turned streetwear essential.',emoji:'👟',price:100,old:null,badge:'TRENDING',rating:4.8,reviews:2800,
+    variants:['Size 8','Size 9','Size 10','Size 11'],
+    specs:{'Upper':'Leather with suede overlays','Sole':'Gum rubber','Cushioning':'EVA','Colorway':'White/Black/Gum','Fit':'Slightly narrow','Origin':'China'}},
+  {id:8,cat:'shoes',name:'New Balance 550',desc:'80s hoops aesthetic. Premium leather with retro sole.',emoji:'👟',price:130,old:160,badge:'SALE',rating:4.6,reviews:1980,
+    variants:['Size 8','Size 9','Size 10','Size 11','Size 12'],
+    specs:{'Upper':'Full-grain leather','Sole':'Rubber','Cushioning':'ENCAP midsole','Colorway':'White/Green','Fit':'True to size','Origin':'China'}},
+];
+
+let state = {
+  page: 'home',
+  filterCat: 'all',
+  cart: [],
+  wishlist: [],
+  selectedProduct: null,
+  selectedVariant: 0,
+  qty: 1,
+  authTab: 'login',
+  payMethod: 'card',
+};
+
+function render() {
+  document.getElementById('app').innerHTML = buildApp();
+  bindEvents();
+}
+
+function buildApp() {
+  return buildNav() + buildPage();
+}
+
+function buildNav() {
+  const cartCount = state.cart.reduce((s,i)=>s+i.qty,0);
+  return `<nav>
+    <div class="logo">Sneak<span>Tech</span></div>
+    <div class="nav-links">
+      <a class="nav-link ${state.page==='home'?'active':''}" onclick="goto('home')">Home</a>
+      <a class="nav-link ${state.page==='shop'?'active':''}" onclick="goto('shop')">Shop</a>
+    </div>
+    <div class="nav-right">
+      <div class="nav-icon" onclick="goto('auth')">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      </div>
+      <div class="nav-icon" onclick="goto('cart')">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        ${cartCount>0?`<span class="badge">${cartCount}</span>`:''}
+      </div>
+    </div>
+  </nav>`;
+}
+
+function buildPage() {
+  if (state.page==='home') return buildHome();
+  if (state.page==='shop') return buildShop();
+  if (state.page==='detail') return buildDetail();
+  if (state.page==='cart') return buildCart();
+  if (state.page==='checkout') return buildCheckout();
+  if (state.page==='auth') return buildAuth();
+  if (state.page==='success') return buildSuccess();
+  return buildHome();
+}
+
+function buildHome() {
+  const featured = PRODUCTS.slice(0,4);
+  return `
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-tag">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        New arrivals 2026
+      </div>
+      <h1 class="hero-title">The Future<br>in Your <em>Hands.</em><br>On Your Feet.</h1>
+      <p class="hero-sub">Exclusive iPhone 17 lineup & iconic sneakers.<br>One destination for what's next.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="goto('shop')">
+          Shop Now
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+        <button class="btn-outline" onclick="goto('shop');setState({filterCat:'shoes'})">Explore Sneakers</button>
+      </div>
+      <div class="hero-stats" style="justify-content:flex-start;gap:2rem;margin-top:2.5rem;">
+        <div class="stat"><div class="stat-num">50+</div><div class="stat-label">Products</div></div>
+        <div class="stat"><div class="stat-num">10k+</div><div class="stat-label">Reviews</div></div>
+        <div class="stat"><div class="stat-num">Free</div><div class="stat-label">Shipping</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="hero-img">📱</div>
+        <p style="font-family:'Syne',sans-serif;font-weight:700;font-size:1.1rem;">iPhone 17 Pro Max</p>
+        <p style="color:var(--muted);font-size:.85rem;margin-top:.25rem;">From $1,399</p>
+        <div style="margin-top:1.5rem;display:flex;gap:1rem;">
+          <div style="flex:1;background:var(--surface);border-radius:10px;padding:1rem;text-align:center;">
+            <div style="font-size:2rem;">👟</div>
+            <div style="font-size:.75rem;color:var(--muted);margin-top:.4rem;">Sneakers</div>
+          </div>
+          <div style="flex:1;background:rgba(29,158,117,.1);border:1px solid rgba(29,158,117,.2);border-radius:10px;padding:1rem;text-align:center;">
+            <div style="font-size:2rem;">📱</div>
+            <div style="font-size:.75rem;color:var(--teal-mid);margin-top:.4rem;">iPhones</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <h2 class="section-title">Featured Products</h2>
+      <span class="section-link" onclick="goto('shop')">View all →</span>
+    </div>
+    <div class="products-grid">
+      ${featured.map(p=>productCard(p)).join('')}
+    </div>
+  </div>
+
+  <div style="max-width:1200px;margin:0 auto;padding:1rem 2rem 3rem;">
+    <div style="background:linear-gradient(135deg,rgba(15,110,86,.4),rgba(10,15,13,.8));border:1px solid var(--teal);border-radius:20px;padding:3rem;text-align:center;">
+      <p style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;margin-bottom:.75rem;">Free Shipping on Every Order</p>
+      <p style="color:var(--muted);margin-bottom:1.5rem;">No minimums. No surprises. SneakTech delivery guaranteed.</p>
+      <button class="btn-primary" onclick="goto('shop')">Start Shopping</button>
+    </div>
+  </div>`;
+}
+
+function buildShop() {
+  const filtered = state.filterCat==='all' ? PRODUCTS : PRODUCTS.filter(p=>p.cat===state.filterCat);
+  return `
+  <div class="section">
+    <h2 class="section-title" style="margin-bottom:1.5rem;">Shop All</h2>
+    <div class="cats">
+      <button class="cat ${state.filterCat==='all'?'active':''}" onclick="setFilter('all')">All Products</button>
+      <button class="cat ${state.filterCat==='iphone'?'active':''}" onclick="setFilter('iphone')">📱 iPhones</button>
+      <button class="cat ${state.filterCat==='shoes'?'active':''}" onclick="setFilter('shoes')">👟 Sneakers</button>
+    </div>
+    <div class="products-grid">
+      ${filtered.map(p=>productCard(p)).join('')}
+    </div>
+  </div>`;
+}
+
+function productCard(p) {
+  const wished = state.wishlist.includes(p.id);
+  return `<div class="product-card" onclick="openProduct(${p.id})">
+    <div class="product-img">
+      ${p.badge?`<span class="product-badge">${p.badge}</span>`:''}
+      <div class="product-wish ${wished?'active':''}" onclick="toggleWish(event,${p.id})">
+        <svg width="16" height="16" fill="${wished?'#1D9E75':'none'}" stroke="${wished?'#1D9E75':'currentColor'}" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+      </div>
+      ${p.emoji}
+    </div>
+    <div class="product-info">
+      <div class="product-name">${p.name}</div>
+      <div class="product-desc">${p.desc}</div>
+      <div class="product-bottom">
+        <div class="product-price">
+          $${p.price}
+          ${p.old?`<span class="old">$${p.old}</span>`:''}
+        </div>
+        <div class="add-btn" onclick="addToCart(event,${p.id})">
+          <svg width="16" height="16" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function buildDetail() {
+  const p = state.selectedProduct;
+  if (!p) return buildShop();
+  const vi = state.selectedVariant;
+  return `<div class="detail-wrap">
+    <div class="detail-back" onclick="goto('shop')">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Back to Shop
+    </div>
+    <div class="detail-grid">
+      <img class="product-real-img" alt="iPhone 15" loading="lazy" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdAnDQAAynLsyacwEzgfu7-RC1aWwlN1gT2A&amp;s">
+      <div>
+        <span class="detail-tag">${p.cat==='iphone'?'📱 iPhone':'👟 Sneakers'}</span>
+        <h1 class="detail-name">${p.name}</h1>
+        <div class="detail-rating">
+          <span class="stars">${'★'.repeat(Math.round(p.rating))}${'☆'.repeat(5-Math.round(p.rating))}</span>
+          <span style="font-size:.85rem;font-weight:600;">${p.rating}</span>
+          <span style="font-size:.8rem;color:var(--muted)">(${p.reviews.toLocaleString()} reviews)</span>
+        </div>
+        <div class="detail-price">$${p.price}${p.old?`<span class="old">$${p.old}</span>`:''}</div>
+        <div class="detail-section-label">${p.cat==='iphone'?'Color':'Size'}</div>
+        <div class="variants">
+          ${p.variants.map((v,i)=>`<div class="variant ${i===vi?'active':''}" onclick="setVariant(${i})">${v}</div>`).join('')}
+        </div>
+        <div class="detail-section-label">Quantity</div>
+        <div class="qty-row">
+          <div class="qty-ctrl">
+            <button class="qty-btn" onclick="setQty(${state.qty-1})">−</button>
+            <span class="qty-val">${state.qty}</span>
+            <button class="qty-btn" onclick="setQty(${state.qty+1})">+</button>
+          </div>
+          <span style="font-size:.85rem;color:var(--muted)">In stock</span>
+        </div>
+        <div class="detail-actions">
+          <button class="btn-cart" onclick="addProductToCart()">Add to Cart</button>
+          <button class="btn-wish-lg" onclick="toggleWishDirect(${p.id})">
+            <svg width="20" height="20" fill="${state.wishlist.includes(p.id)?'#1D9E75':'none'}" stroke="${state.wishlist.includes(p.id)?'#1D9E75':'currentColor'}" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          </button>
+        </div>
+        <div class="detail-specs">
+          <div style="font-size:.9rem;font-weight:600;margin-bottom:.75rem;">Specifications</div>
+          ${Object.entries(p.specs).map(([k,v])=>`<div class="spec-row"><span class="spec-label">${k}</span><span>${v}</span></div>`).join('')}
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function buildCart() {
+  if (state.cart.length===0) return `<div style="text-align:center;padding:5rem 2rem;">
+    <div style="font-size:4rem;margin-bottom:1rem;">🛒</div>
+    <p style="font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:700;margin-bottom:.75rem;">Your cart is empty</p>
+    <p style="color:var(--muted);margin-bottom:1.5rem;">Add some products to get started.</p>
+    <button class="btn-primary" onclick="goto('shop')">Browse Products</button>
+  </div>`;
+
+  const subtotal = state.cart.reduce((s,i)=>s+i.price*i.qty,0);
+  const shipping = 0;
+  const total = subtotal + shipping;
+  return `<div class="cart-wrap">
+    <h1 class="cart-title">Your Cart</h1>
+    <div class="cart-layout">
+      <div class="cart-items">
+        ${state.cart.map(item=>`
+          <div class="cart-item">
+            <div class="cart-item-img">${item.emoji}</div>
+            <div class="cart-item-info">
+              <div class="cart-item-name">${item.name}</div>
+              <div class="cart-item-variant">${item.variant}</div>
+              <div style="display:flex;align-items:center;gap:.75rem;margin-top:.75rem;">
+                <div class="qty-ctrl" style="transform:scale(.9);transform-origin:left;">
+                  <button class="qty-btn" onclick="updateCartQty('${item.id}',${item.qty-1})">−</button>
+                  <span class="qty-val">${item.qty}</span>
+                  <button class="qty-btn" onclick="updateCartQty('${item.id}',${item.qty+1})">+</button>
+                </div>
+              </div>
+            </div>
+            <div class="cart-item-right">
+              <div class="cart-item-price">$${(item.price*item.qty).toLocaleString()}</div>
+              <div class="cart-remove" onclick="removeCartItem('${item.id}')">Remove</div>
+            </div>
+          </div>`).join('')}
+      </div>
+      <div class="order-box">
+        <div class="order-title">Order Summary</div>
+        ${state.cart.map(i=>`<div class="order-row"><span>${i.name} × ${i.qty}</span><span>$${(i.price*i.qty).toLocaleString()}</span></div>`).join('')}
+        <div class="order-row"><span>Shipping</span><span style="color:#4ade80;">Free</span></div>
+        <div class="order-total"><span>Total</span><span style="color:var(--teal-mid);">$${total.toLocaleString()}</span></div>
+        <div class="promo-input">
+          <input placeholder="Promo code" class="form-input" style="margin:0;"/>
+          <button class="promo-btn">Apply</button>
+        </div>
+        <button class="btn-primary" style="width:100%;justify-content:center;" onclick="goto('checkout')">Proceed to Checkout</button>
+        <button class="btn-outline" style="width:100%;justify-content:center;margin-top:.75rem;" onclick="goto('shop')">Continue Shopping</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function buildCheckout() {
+  const subtotal = state.cart.reduce((s,i)=>s+i.price*i.qty,0);
+  return `<div class="checkout-wrap">
+    <div class="detail-back" onclick="goto('cart')">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Back to Cart
+    </div>
+    <div class="checkout-grid">
+      <div>
+        <h2 class="section-title" style="margin-bottom:1.5rem;">Checkout</h2>
+        <div class="form-title">Shipping Information</div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">First Name</label><input class="form-input" placeholder="John"/></div>
+          <div class="form-group"><label class="form-label">Last Name</label><input class="form-input" placeholder="Doe"/></div>
+        </div>
+        <div class="form-group"><label class="form-label">Email</label><input class="form-input" placeholder="john@example.com"/></div>
+        <div class="form-group"><label class="form-label">Address</label><input class="form-input" placeholder="123 Main Street"/></div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">City</label><input class="form-input" placeholder="New York"/></div>
+          <div class="form-group"><label class="form-label">Postal Code</label><input class="form-input" placeholder="10001"/></div>
+        </div>
+        <div class="form-title">Payment Method</div>
+        <div class="payment-method">
+          <div class="pay-opt ${state.payMethod==='card'?'active':''}" onclick="setPayMethod('card')">💳 Card</div>
+          <div class="pay-opt ${state.payMethod==='apple'?'active':''}" onclick="setPayMethod('apple')">🍎 Apple Pay</div>
+          <div class="pay-opt ${state.payMethod==='paypal'?'active':''}" onclick="setPayMethod('paypal')">🅿 PayPal</div>
+        </div>
+        ${state.payMethod==='card'?`
+        <div class="form-group"><label class="form-label">Card Number</label><input class="form-input" placeholder="1234 5678 9012 3456"/></div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Expiry</label><input class="form-input" placeholder="MM/YY"/></div>
+          <div class="form-group"><label class="form-label">CVV</label><input class="form-input" placeholder="123"/></div>
+        </div>`:'<div style="background:var(--surface);border-radius:10px;padding:1.5rem;text-align:center;color:var(--muted);font-size:.9rem;">You will be redirected to complete payment.</div>'}
+        <button class="btn-place" onclick="placeOrder()">Place Order — $${subtotal.toLocaleString()}</button>
+      </div>
+      <div class="order-box" style="top:80px;">
+        <div class="order-title">Order Items</div>
+        ${state.cart.map(i=>`
+          <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem;">
+            <div style="width:40px;height:40px;background:var(--surface);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;">${i.emoji}</div>
+            <div style="flex:1;font-size:.85rem;">${i.name}<br><span style="color:var(--muted);font-size:.75rem;">${i.variant} × ${i.qty}</span></div>
+            <div style="font-size:.9rem;font-weight:600;color:var(--teal-mid);">$${(i.price*i.qty).toLocaleString()}</div>
+          </div>`).join('')}
+        <div style="border-top:1px solid var(--border);margin-top:.5rem;padding-top:.75rem;display:flex;justify-content:space-between;font-weight:700;">
+          <span>Total</span><span style="color:var(--teal-mid);">$${subtotal.toLocaleString()}</span>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function buildAuth() {
+  return `<div class="auth-wrap">
+    <div class="auth-card">
+      <div class="auth-logo">Sneak<span>Tech</span></div>
+      <div class="auth-sub">${state.authTab==='login'?'Welcome back! Sign in to continue.':'Create your account to get started.'}</div>
+      <div class="auth-tab">
+        <button class="auth-tab-btn ${state.authTab==='login'?'active':''}" onclick="setAuthTab('login')">Sign In</button>
+        <button class="auth-tab-btn ${state.authTab==='signup'?'active':''}" onclick="setAuthTab('signup')">Sign Up</button>
+      </div>
+      ${state.authTab==='signup'?`<div class="form-group"><label class="form-label">Full Name</label><input class="form-input" placeholder="John Doe"/></div>`:''}
+      <div class="form-group"><label class="form-label">Email</label><input class="form-input" placeholder="you@example.com"/></div>
+      <div class="form-group"><label class="form-label">Password</label><input class="form-input" type="password" placeholder="••••••••"/></div>
+      ${state.authTab==='login'?`<div style="text-align:right;margin-top:-.5rem;margin-bottom:1rem;"><span style="font-size:.8rem;color:var(--teal-mid);cursor:pointer;">Forgot password?</span></div>`:''}
+      <button class="btn-primary" style="width:100%;justify-content:center;" onclick="goto('home')">${state.authTab==='login'?'Sign In':'Create Account'}</button>
+      <div class="or-divider">or continue with</div>
+      <div class="auth-social">
+        <button class="social-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.93 7h-3.07V7c0-.55.45-1 1-1h2V3.13C16.27 3.05 15.64 3 15 3c-2.76 0-4.5 1.69-4.5 4.56V9H8v3h2.5v7.44c.48.08.97.13 1.5.13s1.02-.05 1.5-.13V12H16l.93-3z"/></svg>
+          Continue with Facebook
+        </button>
+        <button class="social-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M21.35 11.1h-9.17v2.73h6.51c-.33 3.81-3.5 5.44-6.5 5.44C8.36 19.27 5 16.25 5 12c0-4.1 3.2-7.27 7.2-7.27 3.09 0 4.9 1.97 4.9 1.97L19 4.72S16.56 2 12.1 2C6.42 2 2.03 6.8 2.03 12c0 5.05 4.13 10 10.22 10 5.35 0 9.25-3.67 9.25-9.09 0-1.15-.15-1.81-.15-1.81z"/></svg>
+          Continue with Google
+        </button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function buildSuccess() {
+  return `<div class="success-wrap">
+    <div class="success-icon">✅</div>
+    <h1 class="success-title">Order Placed!</h1>
+    <p class="success-sub">Thank you for your order. You'll receive a confirmation email shortly. Your items will be delivered within 2-5 business days.</p>
+    <div style="display:flex;flex-direction:column;gap:.75rem;">
+      <button class="btn-primary" style="justify-content:center;" onclick="goto('shop')">Continue Shopping</button>
+      <button class="btn-outline" style="justify-content:center;" onclick="goto('home')">Back to Home</button>
+    </div>
+  </div>`;
+}
+
+// State / event functions exposed globally
+function goto(page) { state.page = page; render(); }
+function setFilter(cat) { state.filterCat = cat; render(); }
+function setState(obj) { Object.assign(state, obj); render(); }
+function setAuthTab(t) { state.authTab = t; render(); }
+function setPayMethod(m) { state.payMethod = m; render(); }
+function setVariant(i) { state.selectedVariant = i; render(); }
+function setQty(q) { if(q<1) return; state.qty = q; render(); }
+
+function openProduct(id) {
+  const p = PRODUCTS.find(x=>x.id===id);
+  state.selectedProduct = p;
+  state.selectedVariant = 0;
+  state.qty = 1;
+  state.page = 'detail';
+  render();
+}
+
+function toggleWish(e, id) {
+  e.stopPropagation();
+  const idx = state.wishlist.indexOf(id);
+  if (idx>=0) state.wishlist.splice(idx,1);
+  else state.wishlist.push(id);
+  render();
+}
+
+function toggleWishDirect(id) {
+  const idx = state.wishlist.indexOf(id);
+  if (idx>=0) state.wishlist.splice(idx,1);
+  else state.wishlist.push(id);
+  render();
+}
+
+function addToCart(e, id) {
+  e.stopPropagation();
+  const p = PRODUCTS.find(x=>x.id===id);
+  const existing = state.cart.find(i=>i.id===id && i.variant===p.variants[0]);
+  if (existing) existing.qty++;
+  else state.cart.push({id:id+'_0', pid:id, name:p.name, emoji:p.emoji, price:p.price, qty:1, variant:p.variants[0]});
+  render();
+}
+
+function addProductToCart() {
+  const p = state.selectedProduct;
+  const variant = p.variants[state.selectedVariant];
+  const cartId = p.id+'_'+state.selectedVariant;
+  const existing = state.cart.find(i=>i.id===cartId);
+  if (existing) existing.qty += state.qty;
+  else state.cart.push({id:cartId, pid:p.id, name:p.name, emoji:p.emoji, price:p.price, qty:state.qty, variant});
+  state.page = 'cart';
+  render();
+}
+
+function updateCartQty(id, q) {
+  if (q<1) { removeCartItem(id); return; }
+  const item = state.cart.find(i=>i.id===id);
+  if (item) item.qty = q;
+  render();
+}
+
+function removeCartItem(id) {
+  state.cart = state.cart.filter(i=>i.id!==id);
+  render();
+}
+
+function placeOrder() {
+  state.cart = [];
+  state.page = 'success';
+  render();
+}
+
+window.goto=goto;window.setFilter=setFilter;window.setState=setState;window.setAuthTab=setAuthTab;
+window.setPayMethod=setPayMethod;window.setVariant=setVariant;window.setQty=setQty;
+window.openProduct=openProduct;window.toggleWish=toggleWish;window.toggleWishDirect=toggleWishDirect;
+window.addToCart=addToCart;window.addProductToCart=addProductToCart;
+window.updateCartQty=updateCartQty;window.removeCartItem=removeCartItem;window.placeOrder=placeOrder;
+
+function bindEvents() {}
+
+document.addEventListener('DOMContentLoaded', render);
+</script>
+
+<div id="app"></div>
+<footer>© 2026 SneakTech. All rights reserved.</footer>
+
+<script>render();</script>
+</body>
+</html>
